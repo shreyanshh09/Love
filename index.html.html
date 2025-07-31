@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Reem ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+
+    .screen {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      opacity: 0;
+      transition: opacity 1s ease;
+      padding: 0 20px;
+      box-sizing: border-box;
+    }
+
+    .active {
+      display: flex;
+    }
+
+    .visible {
+      opacity: 1;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 1.4rem;
+      max-width: 700px;
+      margin: 10px auto;
+      line-height: 1.6;
+    }
+
+    .btn {
+      padding: 12px 24px;
+      font-size: 1rem;
+      background: #ff6f91;
+      border: none;
+      border-radius: 20px;
+      color: white;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #ff4d6d;
+    }
+
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .heart {
+      position: absolute;
+      color: #ff4d6d;
+      font-size: 20px;
+      animation: float 7s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) scale(0.5);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .back-btn {
+      margin-top: 30px;
+      background: transparent;
+      border: 1px solid white;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Screen 1: Welcome -->
+  <div class="screen active visible" id="screen1">
+    <h1>Hello Princess Reem ❤️</h1>
+    <h2>Happy Girlfriend's Day!</h2>
+    <p>Today is all about celebrating you, my princess. You are mine all day, every day.</p>
+    <button class="btn" onclick="nextScreen('screen2')">🎁 A Surprise For You</button>
+  </div>
+
+  <!-- Screen 2: Surprise -->
+  <div class="screen" id="screen2">
+    <h1>🎁 Surprise 🎁</h1>
+    <p>You are not just a gift, but a beautiful feeling.<br>This page and its words are always for you ❤️</p>
+    <button class="btn" onclick="nextScreen('screen3')">📜 A Little Poetry</button>
+  </div>
+
+  <!-- Screen 3: Poetry -->
+  <div class="screen" id="screen3">
+    <h1>✨ Poetry ✨</h1>
+    <p>
+      "Your smile is my identity,<br>
+      Your presence is my desire,<br>
+      Never be far from me,<br>
+      That's my only hope..." 💖
+    </p>
+    <button class="btn" onclick="nextScreen('screen4')">💬 A Heartfelt Note</button>
+  </div>
+
+  <!-- Screen 4: Final Feel -->
+  <div class="screen" id="screen4">
+    <h1>💌 From The Heart 💌</h1>
+    <p>
+      Princess Reem, you are that special line in my life<br>
+      that I read every day and never get bored of.<br>
+      ❤️ Always yours
+    </p>
+    <button class="btn back-btn" onclick="nextScreen('screen1')">🔁 View Again</button>
+  </div>
+
+  <!-- Background Heart Animation -->
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    const screens = document.querySelectorAll(".screen");
+
+    function nextScreen(id) {
+      screens.forEach(screen => {
+        screen.classList.remove("active", "visible");
+      });
+
+      const next = document.getElementById(id);
+      next.classList.add("active");
+      setTimeout(() => next.classList.add("visible"), 50);
+    }
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.innerText = "💖";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 20 + "px";
+      heart.style.animationDuration = Math.random() * 3 + 5 + "s";
+      heart.style.opacity = Math.random();
+
+      document.getElementById("hearts").appendChild(heart);
+      setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 250);
+  </script>
+
+</body>
+</html>
+
