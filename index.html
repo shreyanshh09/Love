@@ -3,313 +3,242 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>For My Princess ❤️</title>
+  <title>For My Princess Reem ❤️</title>
   <style>
-    * {margin:0;padding:0;box-sizing:border-box}
+    * { margin:0; padding:0; box-sizing:border-box; }
     body {
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to top left, #ffb3c6, #ffe0f0);
-      color: #fff;
-      text-align: center;
+      background: linear-gradient(to top left, #ffe0e6, #ffd9e6);
+      color: #333;
       overflow: hidden;
+      text-align: center;
     }
-
     .screen {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100vh;
       display: none;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
       padding: 20px;
-      transition: opacity 1s ease;
+      perspective: 1000px;
     }
-
     .screen.active {
       display: flex;
-      animation: fadeIn 1s forwards;
+      animation: fadeIn 1s ease both;
     }
-
-    h1 {
-      font-size: 2.6rem;
-      margin-bottom: 20px;
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity:1; transform: scale(1); }
     }
-
-    p {
-      font-size: 1.3rem;
-      max-width: 600px;
+    .flip-enter {
+      transform: rotateY(-90deg);
+      opacity: 0;
     }
-
+    .flip-enter-active {
+      transform: rotateY(0deg);
+      opacity:1;
+      transition: transform 0.6s, opacity 0.6s;
+    }
+    h1 { font-size: 2.4rem; margin-bottom: 15px; }
+    p { font-size: 1.2rem; max-width: 650px; }
     .button {
-      margin-top: 30px;
-      padding: 12px 24px;
-      background: #ff3366;
-      color: white;
-      font-size: 1.1rem;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
+      margin-top: 25px;
+      padding: 12px 26px;
+      background: #e6004c; color:#fff;
+      font-size: 1.1rem; border:none;
+      border-radius: 25px; cursor:pointer;
       transition: background 0.3s;
     }
-
-    .button:hover {
-      background: #e6004c;
-    }
-
-    .heart {
+    .button:hover { background: #b3003a; }
+    .petal {
       position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
-      transform: rotate(45deg);
-      animation: floatHeart 8s linear infinite;
-      opacity: 0.8;
-    }
-
-    .heart::before, .heart::after {
-      content: '';
-      position: absolute;
-      width: 20px;
-      height: 20px;
-      background: red;
+      width: 20px; height: 20px;
+      background: pink;
       border-radius: 50%;
+      opacity: 0.8;
+      animation: fall 8s linear infinite;
     }
-
-    .heart::before {top: -10px; left: 0;}
-    .heart::after {left: -10px; top: 0;}
-
-    @keyframes floatHeart {
-      0% {transform: translateY(100vh) rotate(45deg); opacity: 0;}
-      100% {transform: translateY(-10vh) rotate(45deg); opacity: 1;}
+    @keyframes fall {
+      0% { transform: translateY(-10vh) rotate(0deg); }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
     }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: scale(0.9);}
-      to { opacity: 1; transform: scale(1);}
-    }
-
     .letter {
       font-family: 'Georgia', serif;
       font-size: 1.1rem;
-      background: rgba(255,255,255,0.15);
+      background: rgba(255,255,255,0.3);
+      color: #333;
       padding: 20px;
       max-width: 700px;
       border-radius: 10px;
-      border: 2px dashed #fff;
-      animation: typewriter 4s steps(80) 1s 1 normal both;
+      border: 2px dashed #444;
+      animation: typewriter 4s steps(80) 0.8s both;
       white-space: pre-wrap;
       overflow: hidden;
     }
-
     @keyframes typewriter {
       from { width: 0; }
       to { width: 100%; }
     }
-
     .ring {
-      width: 100px;
-      height: 100px;
-      border: 6px solid #fff;
-      border-radius: 50%;
-      box-shadow: 0 0 20px #fff;
-      margin: 20px auto;
+      width:120px; height:120px;
+      border:6px solid #e6004c;
+      border-radius:50%;
+      box-shadow: 0 0 25px #e6004c;
       animation: glow 1.5s infinite alternate;
+      margin: 20px auto;
     }
-
     @keyframes glow {
-      from {box-shadow: 0 0 10px #fff;}
-      to {box-shadow: 0 0 30px #ff99cc;}
+      from { box-shadow:0 0 10px #e6004c; }
+      to { box-shadow:0 0 30px #ff99cc; }
     }
-
+    .countdown { font-size: 1.9rem; margin-top: 20px; color: #333; }
+    .timeline {
+      background: rgba(255,255,255,0.2);
+      border-left: 4px solid #e6004c;
+      padding:20px;
+      margin-top:20px;
+      text-align:left;
+      max-width:600px;
+      color: #333;
+    }
+    .timeline p::before { content:"❤️ "; }
     canvas {
       position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .countdown {
-      font-size: 2rem;
-      margin-top: 20px;
-    }
-
-    .timeline {
-      background: rgba(255,255,255,0.1);
-      border-left: 4px solid #fff;
-      padding: 20px;
-      margin-top: 20px;
-      text-align: left;
-      max-width: 600px;
-    }
-
-    .timeline p::before {
-      content: "❤️ ";
+      top:0; left:0;
+      pointer-events:none;
+      z-index:0;
     }
   </style>
 </head>
 <body>
 
-  <div class="screen active" id="screen1">
-    <h1>Happy Girlfriend Day, Princess Reem ❤️</h1>
-    <p>Aap meri zindagi ka sabse khoobsurat hissa hain. Aapke saath sab kuch magical lagta hai. 💫</p>
-    <button class="button" onclick="nextScreen()">Next ➡️</button>
+<div class="screen active" id="screen1">
+  <h1>Happy Girlfriend Day, Princess Reem ❤️</h1>
+  <p>Aap meri zindagi ka sabse khoobsurat hissa hain. Aapke saath sab kuch magical lagta hai.</p>
+  <button class="button" onclick="nextScreen()">Next ➡️</button>
+</div>
+
+<div class="screen" id="screen2">
+  <h1>Aapki muskurahat... meri duniya hai 😊</h1>
+  <p>Jab bhi aap hanshti hain, lagta hai jaise saari duniya roshan ho gayi ho.</p>
+  <button class="button" onclick="nextScreen()">Next ➡️</button>
+</div>
+
+<div class="screen" id="screen3">
+  <h1>Ek baat kehni thi... 😘</h1>
+  <button class="button" onclick="sayLove()">I Love You ❤️</button>
+</div>
+
+<div class="screen" id="screen4">
+  <h1>Ek khaas patra aapke liye ✉️</h1>
+  <div class="letter">
+Meri Pyari Princess Reem,
+
+Aapka saath mere liye ek dua ki tarah hai. Aapki muskurahat mera noor hai, aur
+aapki khushi mera maqsad.
+
+Har ek din aapke saath jeena chahta hoon, har ek lamha aapke naam karna chahta
+hoon.
+
+Aaj ke din, bas itna kehna chahta hoon:
+I love you. Hamesha ke liye. ❤️
+
+Aapka Shreyansh
   </div>
+  <button class="button" onclick="nextScreen()">Next ➡️</button>
+</div>
 
-  <div class="screen" id="screen2">
-    <h1>Aapka ek muskaan... meri duniya hai 😊</h1>
-    <p>Jab bhi aap hanshti ho, lagta hai jaise saari duniya roshan ho gayi ho. </p>
-    <button class="button" onclick="nextScreen()">Next ➡️</button>
+<div class="screen" id="screen5">
+  <h1>Ek chhoti si nishani 💍</h1>
+  <div class="ring"></div>
+  <p>Yeh dil, yeh commitment — sirf aapke liye.</p>
+  <button class="button" onclick="nextScreen()">Next ➡️</button>
+</div>
+
+<div class="screen" id="screen6">
+  <h1>Hamari Prem Kahani 📖</h1>
+  <div class="timeline">
+    <p>20 May — Jab hamari kahani shuru hui</p>
+    <p>Tab se har din aapke naam raha</p>
+    <p>Smile, texts, calls — sab kuch ek nayi duniya ban gaya</p>
+    <p>Aap aur main — hamesha saath</p>
   </div>
+  <button class="button" onclick="nextScreen()">Final Surprise 🎇</button>
+</div>
 
-  <div class="screen" id="screen3">
-    <h1>Ek baat kehni thi... 😘</h1>
-    <button class="button" onclick="sayLove()">I Love You ❤️</button>
-  </div>
+<div class="screen" id="screen7">
+  <h1>Aapka Din Aane Wala Hai 👑</h1>
+  <p>20th May tak kitna time bacha hai...</p>
+  <div class="countdown" id="countdown"></div>
+  <canvas id="fireworksCanvas"></canvas>
+</div>
 
-  <div class="screen" id="screen4">
-    <h1>Ek khaas patra aapke liye ✉️</h1>
-    <div class="letter">
-      Meri Pyari Princess Reem,
-
-      Aapka saath mere liye ek dua ki tarah hai. Aapki muskurahat mera noor hai, aur aapki khushi mera maqsad.
-
-      Har ek din aapke saath jeena chahta hoon, har ek lamha aapke naam karna chahta hoon.
-
-      Aaj ke din, bas itna kehna chahta hoon:
-      I love you. Hamesha ke liye. ❤️
-
-      Aapka Shreyansh
-    </div>
-    <button class="button" onclick="nextScreen()">Next ➡️</button>
-  </div>
-
-  <div class="screen" id="screen5">
-    <h1>Ek chhoti si nishani 💍</h1>
-    <div class="ring"></div>
-    <p>Yeh dil, yeh commitment — sirf aapke liye.</p>
-    <button class="button" onclick="nextScreen()">Next ➡️</button>
-  </div>
-
-  <div class="screen" id="screen6">
-    <h1>Hamari Prem Kahani 📖</h1>
-    <div class="timeline">
-      <p>20 May — Jab hamari kahani shuru hui ❤️</p>
-      <p>Tab se har din aapke naam raha 💌</p>
-      <p>Smile, texts, calls — sab kuch ek nayi duniya ban gaya 🌍</p>
-      <p>Aap aur main — hamesha saath ❤️</p>
-    </div>
-    <button class="button" onclick="nextScreen()">Final Surprise 🎇</button>
-  </div>
-
-  <div class="screen" id="screen7">
-    <h1>Aapka Din Aane Wala Hai 👑</h1>
-    <p>20th May tak kitna time bacha hai...</p>
-    <div class="countdown" id="countdown"></div>
-    <canvas id="fireworksCanvas"></canvas>
-  </div>
-
-  <!-- JS -->
-  <script>
-    let currentScreen = 1;
-    function nextScreen() {
-      document.getElementById(`screen${currentScreen}`).classList.remove('active');
-      currentScreen++;
-      const next = document.getElementById(`screen${currentScreen}`);
-      if (next) {
-        next.classList.add('active');
-        if (currentScreen === 7) {
-          launchFireworks();
-          startCountdown();
-        }
-      }
+<script>
+  let currentScreen = 1;
+  function nextScreen() {
+    const prev = document.getElementById(`screen${currentScreen}`);
+    prev.classList.remove('active');
+    currentScreen++;
+    const next = document.getElementById(`screen${currentScreen}`);
+    if (next) next.classList.add('active');
+    if (currentScreen === 7) {
+      launchFireworks(); startCountdown();
     }
-
-    function sayLove() {
-      alert("I Love You Too, Princess 💖\nAap meri duniya ho, meri jaan ho.");
+  }
+  function sayLove() {
+    alert("I Love You Too, Princess 💖\nAap meri duniya ho, meri jaan ho.");
+  }
+  function createPetal() {
+    const petal = document.createElement("div");
+    petal.classList.add("petal");
+    petal.style.left = Math.random()*100 + "vw";
+    petal.style.animationDuration = (5 + Math.random()*5) + "s";
+    document.body.appendChild(petal);
+    setTimeout(()=>petal.remove(), 10000);
+  }
+  setInterval(createPetal,150);
+  function launchFireworks() {
+    const c = document.getElementById("fireworksCanvas"),
+          ctx = c.getContext("2d");
+    c.width = innerWidth; c.height = innerHeight;
+    let parts=[];
+    function createParticle(x,y){
+      const ang=Math.random()*2*Math.PI, spd=Math.random()*5+2;
+      return {x,y,dx:Math.cos(ang)*spd,dy:Math.sin(ang)*spd,life:100,
+              color:`hsl(${Math.random()*360},100%,70%)`};
     }
-
-    function createHeart() {
-      const heart = document.createElement("div");
-      heart.classList.add("heart");
-      heart.style.left = Math.random() * 100 + "vw";
-      heart.style.animationDuration = (5 + Math.random() * 5) + "s";
-      document.body.appendChild(heart);
-      setTimeout(() => heart.remove(), 10000);
+    function explode(x,y){
+      for(let i=0;i<40;i++) parts.push(createParticle(x,y));
     }
-    setInterval(createHeart, 200);
-
-    // Fireworks
-    function launchFireworks() {
-      const canvas = document.getElementById("fireworksCanvas");
-      const ctx = canvas.getContext("2d");
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      let particles = [];
-
-      function createParticle(x, y) {
-        const angle = Math.random() * 2 * Math.PI;
-        const speed = Math.random() * 5 + 2;
-        return {
-          x, y,
-          dx: Math.cos(angle) * speed,
-          dy: Math.sin(angle) * speed,
-          life: 100,
-          color: `hsl(${Math.random() * 360}, 100%, 70%)`
-        };
-      }
-
-      function explode(x, y) {
-        for (let i = 0; i < 40; i++) particles.push(createParticle(x, y));
-      }
-
-      function updateParticles() {
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-        particles = particles.filter(p => p.life > 0);
-        particles.forEach(p => {
-          p.x += p.dx;
-          p.y += p.dy;
-          p.dy += 0.05;
-          p.life -= 1;
-          ctx.beginPath();
-          ctx.arc(p.x, p.y, 2, 0, 2 * Math.PI);
-          ctx.fillStyle = p.color;
-          ctx.fill();
-        });
-      }
-
-      setInterval(() => {
-        explode(Math.random() * canvas.width, Math.random() * canvas.height);
-      }, 1000);
-      setInterval(updateParticles, 30);
+    function update(){
+      ctx.clearRect(0,0,c.width,c.height);
+      parts=parts.filter(p=>p.life>0);
+      parts.forEach(p=>{
+        p.x+=p.dx; p.y+=p.dy; p.dy+=0.05; p.life--;
+        ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0,2*Math.PI);
+        ctx.fillStyle = p.color; ctx.fill();
+      });
     }
-
-    // Countdown
-    function startCountdown() {
-      const countdown = document.getElementById("countdown");
-      const targetDate = new Date("2025-05-20T00:00:00");
-      function updateCountdown() {
-        const now = new Date();
-        const diff = targetDate - now;
-        if (diff <= 0) {
-          countdown.innerText = "It's your day, Princess! 💝";
-          return;
-        }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
-        const mins = Math.floor((diff / (1000 * 60)) % 60);
-        const secs = Math.floor((diff / 1000) % 60);
-        countdown.innerText = `${days}d ${hrs}h ${mins}m ${secs}s`;
-      }
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
+    setInterval(()=>explode(Math.random()*c.width, Math.random()*c.height), 800);
+    setInterval(update, 30);
+  }
+  function startCountdown(){
+    const cd = document.getElementById("countdown"),
+          target = new Date("2026-05-20T00:00:00");
+    function upd(){
+      const now = new Date(), diff = target - now;
+      if (diff<=0) {cd.innerText="It's your day, Princess! 💝"; return;}
+      const d = Math.floor(diff/(1e3*60*60*24)),
+            h = Math.floor(diff/(1e3*60*60)%24),
+            m = Math.floor(diff/(1e3*60)%60),
+            s = Math.floor(diff/1000%60);
+      cd.innerText = `${d}d ${h}h ${m}m ${s}s`;
     }
-  </script>
+    upd(); setInterval(upd,1000);
+  }
+</script>
 
 </body>
 </html>
-
-
-</body>
-</html>
-
-
